@@ -3,6 +3,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, number, object, select } from '@storybook/addon-knobs';
 import { withInfo } from '@storybook/addon-info';
 import { version } from '../../package.json';
+import podcast from '../sample-data/PEGGY BLOOD INTERVIEW 2 RAW_SBS_ID_24711750.mp3';
 
 import Button from '@material-ui/core/Button';
 import SlateTranscriptEditor from './index.js';
@@ -28,6 +29,12 @@ const AUDIO_URL = 'https://www.w3schools.com/tags/horse.ogg';
 const DEMO_MEDIA_URL_KATE = 'https://download.ted.com/talks/KateDarling_2018S-950k.mp4';
 const DEMO_TITLE_KATE = 'TED Talk | Kate Darling - Why we have an emotional connection to robots';
 import DEMO_TRANSCRIPT_KATE from '../sample-data/KateDarling-dpe.json';
+import DEMO_BLOOD from '../sample-data/PEGGY_BLOOD_INTERVIEW_2_RAW_SBS_ID_24711750.mp3.json';
+import audio from '../sample-data/PEGGY BLOOD INTERVIEW 2 RAW_SBS_ID_24711750.mp3';
+
+const podcastFile = {
+  src: audio,
+};
 
 const DEMO_MEDIA_URL_SOLEIO =
   'https://digital-paper-edit-demo.s3.eu-west-2.amazonaws.com/PBS-Frontline/The+Facebook+Dilemma+-+interviews/The+Facebook+Dilemma+-+Soleio+Cuervo-OIAUfZBd_7w.mp4';
@@ -40,13 +47,13 @@ export const demo = () => {
         Slate Transcript Editor version: <code>{version}</code>
       </p>
       <SlateTranscriptEditor
-        mediaUrl={text('mediaUrl', DEMO_MEDIA_URL_SOLEIO)}
+        mediaUrl={text('mediaUrl', podcastFile.src)}
         handleSaveEditor={action('handleSaveEditor')}
         // handleAutoSaveChanges={action('handleAutoSaveChanges')}
         // https://www.npmjs.com/package/@storybook/addon-knobs#select
         // autoSaveContentType={select('autoSaveContentType', ['digitalpaperedit', 'slate'], 'digitalpaperedit')} // digitalpaperedit or slate - digitalpaperedit, runs alignement before exporting, slate, is just the raw data.
         // transcriptData={object('transcriptData', DEMO_SOLEIO)}
-        transcriptData={DEMO_SOLEIO}
+        transcriptData={DEMO_BLOOD}
       />
     </>
   );

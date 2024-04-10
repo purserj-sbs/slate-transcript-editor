@@ -44,6 +44,7 @@ import updateBloocksTimestamps from '../util/export-adapters/slate-to-dpe/update
 import exportAdapter, { isCaptionType } from '../util/export-adapters';
 import generatePreviousTimingsUpToCurrent from '../util/dpe-to-slate/generate-previous-timings-up-to-current';
 import SlateHelpers from './slate-helpers';
+import convertSbsToSlate from '../util/sbs-to-slate/index.js';
 
 const PLAYBACK_RATE_VALUES = [0.2, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3, 3.5];
 const SEEK_BACK_SEC = 10;
@@ -89,7 +90,7 @@ function SlateTranscriptEditor(props) {
 
   useEffect(() => {
     if (props.transcriptData) {
-      const res = convertDpeToSlate(props.transcriptData);
+      const res = convertSbsToSlate(props.transcriptData);
       setValue(res);
     }
   }, []);
@@ -97,7 +98,7 @@ function SlateTranscriptEditor(props) {
   // handles interim results for worrking with a Live STT
   useEffect(() => {
     if (props.transcriptDataLive) {
-      const nodes = convertDpeToSlate(props.transcriptDataLive);
+      const nodes = convertSbsToSlate(props.transcriptDataLive);
       // if the user is selecting the / typing the text
       // Transforms.insertNodes would insert the node at seleciton point
       // instead we check if they are in the editor
